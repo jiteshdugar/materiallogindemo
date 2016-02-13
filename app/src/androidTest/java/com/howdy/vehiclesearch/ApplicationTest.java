@@ -1,4 +1,4 @@
-package com.sourcey.materiallogindemo;
+package com.howdy.vehiclesearch;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

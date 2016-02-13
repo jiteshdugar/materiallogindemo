@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sourcey.materiallogindemo" >
+    package="com.howdy.vehiclesearch" >
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <receiver
+        android:name=".SmsReceiver"
+        android:enabled="true"
+        android:exported="true">
+        <intent-filter android:priority="999">
+            <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+        </intent-filter>
+    </receiver>
 
     <application
         android:allowBackup="true"
@@ -8,7 +20,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.sourcey.materiallogindemo.MainActivity"
+            android:name="com.howdy.vehiclesearch.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,8 +28,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sourcey.materiallogindemo.LoginActivity" android:theme="@style/AppTheme.Dark" />
-        <activity android:name="com.sourcey.materiallogindemo.SignupActivity" android:theme="@style/AppTheme.Dark" />
+        <activity android:name=".SearchVehicleActivity" android:theme="@style/AppTheme.Dark" />
     </application>
 
 </manifest>

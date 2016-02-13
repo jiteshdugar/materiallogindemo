@@ -1,4 +1,4 @@
-package com.sourcey.materiallogindemo;
+package com.howdy.vehiclesearch;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -15,7 +15,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
 
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, SearchVehicleActivity.class);
         startActivity(intent);
     }
 

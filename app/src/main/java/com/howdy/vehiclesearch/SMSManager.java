@@ -35,15 +35,24 @@ public class SMSManager extends BroadcastReceiver {
                 // Convert Object array
                 msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
                 // Sender's phone number
-                str += "SMS from " + msgs[i].getOriginatingAddress() + " : ";
-                // Fetch the text message
-                str += msgs[i].getMessageBody().toString();
-                // Newline <img src="http://codetheory.in/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;">
-                str += "\n";
+                Log.d("source",msgs[i].getOriginatingAddress());
+                if(msgs[i].getOriginatingAddress().equals("DM-VAAHAN")) {
+                    str += "SMS from " + msgs[i].getOriginatingAddress() + " : ";
+                    // Fetch the text message
+                    str += msgs[i].getMessageBody().toString();
+                    // Newline <img src="http://codetheory.in/wp-includes/images/smilies/simple-smile.png" alt=":-)" class="wp-smiley" style="height: 1em; max-height: 1em;">
+                    str += "\n";
+                    Log.d("SmsReceiver", str);
+                    try {
+                        VehicleDetails.getInstace().updateTheTextView(str);
+                    } catch (Exception e) {
+
+                    }
+                }
             }
 
             // Display the entire SMS Message
-            Log.d(TAG, str);
+            //Log.d(TAG, str);
         }
     }
 }

@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
@@ -24,20 +25,41 @@ public class SearchVehicleActivity extends AppCompatActivity {
 
     @Bind(R.id.input_regno) EditText _regnoText;
     @Bind(R.id.btn_search) Button _searchButton;
-    
+    private static SearchVehicleActivity ins;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchvehicle);
         ButterKnife.bind(this);
-        
+        ins = this;
+
         _searchButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
+                final ProgressDialog progressDialog = new ProgressDialog(SearchVehicleActivity.this,
+                        R.style.AppThemeDialogNoActionBar);
+                progressDialog.setIndeterminate(true);
+                progressDialog.setMessage("Fetching Data...");
+                progressDialog.show();
+
                 sendSMS();
+
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                progressDialog.dismiss();
+                            }
+                        }, 3000);
+                Intent intent = new Intent(getApplicationContext(),VehicleDetails.class);
+                startActivity(intent);
+
             }
         });
+    }
+    public static SearchVehicleActivity  getInstace(){
+        return ins;
     }
 
     public void sendSMS() {
